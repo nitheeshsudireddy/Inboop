@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link
+            rel="stylesheet"
+            as="style"
+            onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans:wght@400;500;700;900&family=Spline+Sans:wght@400;500;700"
+    />
+    <title>Inboop</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body>
+<div class="relative flex size-full min-h-screen flex-col bg-[#f9f8fc] group/design-root overflow-x-hidden" style='font-family: "Spline Sans", "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#ebe7f4] px-10 py-3">
+            <div class="flex items-center gap-4 text-[#110d1c]">
+                <div class="size-4">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_6_535)">
+                            <path
+                                    fill-rule="evenodd"
+                                    clip-rule="evenodd"
+                                    d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                                    fill="currentColor"
+                            ></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_6_535"><rect width="48" height="48" fill="white"></rect></clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 class="text-[#110d1c] text-lg font-bold leading-tight tracking-[-0.015em]">Inboop</h2>
+            </div>
+        </header>
+
+        <div class="px-40 flex flex-1 justify-center py-5">
+            <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+                <h2 class="text-[#110d1c] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Welcome back</h2>
+
+                <!-- Login form (posts to Spring Security) -->
+                <form method="post" th:action="@{/login}">
+                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#110d1c] text-base font-medium leading-normal pb-2">Email</p>
+                            <input
+                                    name="username"
+                                    type="text"
+                                    placeholder="Email"
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#110d1c] focus:outline-0 focus:ring-0 border border-[#d6cee8] bg-[#f9f8fc] focus:border-[#d6cee8] h-14 placeholder:text-[#62499c] p-[15px] text-base font-normal leading-normal"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                        <label class="flex flex-col min-w-40 flex-1">
+                            <p class="text-[#110d1c] text-base font-medium leading-normal pb-2">Password</p>
+                            <input
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"
+                                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-[#110d1c] focus:outline-0 focus:ring-0 border border-[#d6cee8] bg-[#f9f8fc] focus:border-[#d6cee8] h-14 placeholder:text-[#62499c] p-[15px] text-base font-normal leading-normal"
+                            />
+                        </label>
+                    </div>
+
+                    <div class="flex px-4 py-3">
+                        <button
+                                type="submit"
+                                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#743df5] text-[#f9f8fc] text-base font-bold leading-normal tracking-[0.015em]"
+                        >
+                            <span class="truncate">Log in</span>
+                        </button>
+                    </div>
+                </form>
+
+                <p class="text-[#62499c] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">or</p>
+
+                <!-- Google login -->
+                <div class="flex px-4 py-3">
+                    <a
+                            href="/oauth2/authorization/google"
+                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 flex-1 bg-[#ebe7f4] text-[#110d1c] gap-2 pl-5 text-base font-bold leading-normal tracking-[0.015em]"
+                    >
+                        <div class="text-[#110d1c]" data-icon="GoogleLogo" data-size="24px" data-weight="regular">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                                <path d="M224,128a96,96,0,1,1-21.95-61.09,8,8,0,1,1-12.33,10.18A80,80,0,1,0,207.6,136H128a8,8,0,0,1,0-16h88A8,8,0,0,1,224,128Z"></path>
+                            </svg>
+                        </div>
+                        <span class="truncate">Log in with Google</span>
+                    </a>
+                </div>
+
+                <p class="text-[#62499c] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
+                    <a href="/register">Don't have an account? Sign up</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inboop Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=Spline+Sans:wght@400;500;700&display=swap"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body style='font-family: "Spline Sans", "Noto Sans", sans-serif;'>
+<div class="min-h-screen bg-[#f9f8fc]">
+    <header class="flex justify-between items-center px-10 py-3 border-b border-[#ebe7f4]">
+        <h2 class="text-lg font-bold">Inboop</h2>
+        <div class="flex gap-4 items-center">
+            <a href="#" class="text-sm font-medium">Leads</a>
+            <a href="#" class="text-sm font-medium">Orders</a>
+            <a href="#" class="text-sm font-medium">Customers</a>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="px-3 py-1 bg-red-200 rounded">Logout</button>
+            </form>
+        </div>
+    </header>
+
+    <main class="px-10 py-5">
+        <h1 class="text-2xl font-bold mb-4">Welcome, <span th:text="${username}">User</span></h1>
+        <div class="overflow-x-auto rounded border border-[#d6cee8] bg-[#f9f8fc]">
+            <table class="min-w-full">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2 text-left">Name</th>
+                    <th class="px-4 py-2 text-left">Source</th>
+                    <th class="px-4 py-2 text-left">Status</th>
+                    <th class="px-4 py-2 text-left">Assigned To</th>
+                    <th class="px-4 py-2 text-left">Last Activity</th>
+                    <th class="px-4 py-2 text-left">Created At</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="lead : ${leads}" class="border-t border-[#d6cee8]">
+                    <td class="px-4 py-2" th:text="${lead.name}">Name</td>
+                    <td class="px-4 py-2 text-[#62499c]" th:text="${lead.source}">Source</td>
+                    <td class="px-4 py-2">
+                        <span class="px-2 py-1 rounded-full bg-[#ebe7f4] text-[#110d1c]" th:text="${lead.status}">Status</span>
+                    </td>
+                    <td class="px-4 py-2 text-[#62499c]" th:text="${lead.assigned}">Assigned</td>
+                    <td class="px-4 py-2 text-[#62499c]" th:text="${lead.lastActivity}">Last Activity</td>
+                    <td class="px-4 py-2 text-[#62499c]" th:text="${lead.createdAt}">Created At</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+</body>
+</html>
