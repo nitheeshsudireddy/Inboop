@@ -1,15 +1,11 @@
-package com.inboop.backend.InboopController;
-
+package com.inboop.backend.auth.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 import java.security.Principal;
 import java.util.List;
@@ -18,29 +14,28 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    @GetMapping({"/","/home"})
+    @GetMapping({"/", "/home"})
     public String home() {
-        return "home"; // looks for templates/home.html
+        return "home";
     }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal) {
-        // principal.getName() returns logged-in username
         model.addAttribute("username", principal.getName());
 
-        // Sample data for table (replace with real data from DB later)
+        // Sample data for table (TODO: replace with real data from lead service)
         List<Map<String, String>> leads = List.of(
-                Map.of("name","Sophia Clark", "source","Facebook", "status","New", "assigned","Emily Carter", "lastActivity","2 days ago","createdAt","2023-08-15"),
-                Map.of("name","Liam Walker", "source","Instagram", "status","Contacted", "assigned","David Miller", "lastActivity","1 day ago","createdAt","2023-08-14")
-                // add more rows if needed
+                Map.of("name", "Sophia Clark", "source", "Facebook", "status", "New",
+                       "assigned", "Emily Carter", "lastActivity", "2 days ago", "createdAt", "2023-08-15"),
+                Map.of("name", "Liam Walker", "source", "Instagram", "status", "Contacted",
+                       "assigned", "David Miller", "lastActivity", "1 day ago", "createdAt", "2023-08-14")
         );
         model.addAttribute("leads", leads);
 
-        return "dashboard"; // looks for dashboard.html
+        return "dashboard";
     }
 
-
-    @GetMapping("/api/me")
+    @GetMapping("/api/v1/auth/me")
     @ResponseBody
     public Map<String, Object> currentUser(@AuthenticationPrincipal UserDetails user) {
         if (user == null) {
@@ -52,5 +47,4 @@ public class UserController {
                 "roles", user.getAuthorities()
         );
     }
-
 }
