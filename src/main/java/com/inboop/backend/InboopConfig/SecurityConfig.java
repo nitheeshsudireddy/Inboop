@@ -51,7 +51,7 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/dashboard", true) // after Google/GitHub login → dashboard
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll());
-                
+
 
 
         return http.build();
